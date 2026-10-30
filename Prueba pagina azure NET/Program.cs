@@ -22,4 +22,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/", () => "Hola Mundo desde Azure!");
+
+app.MapGet("/hola", () => new
+{
+    Mensaje = "Mi backend .NET 8 funciona correctamente",
+    Estado = "OK",
+    Fecha = DateTime.UtcNow
+});
+
 app.Run();
