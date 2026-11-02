@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Prueba HTTP Azure</title>
+</head>
+<body>
+    <h1>Prueba HTTP - Azure App Service</h1>
+
+    <p>Mi aplicación ASP.NET Core está publicada en Azure.</p>
+
+    <button onclick="probarAPI()">
+        Probar API
+    </button>
+
+    <pre id="resultado"></pre>
+
+    <script>
+        async function probarAPI() {
+            const resultado =
+                document.getElementById("resultado");
+
+            try {
+                const response = await fetch("/hola");
+
+                if (!response.ok) {
+                    throw new Error(
+                        `HTTP ${response.status}`
+                    );
+                }
+
+                const data = await response.json();
+
+                resultado.textContent =
+                    JSON.stringify(data, null, 2);
+
+            } catch (error) {
+                resultado.textContent =
+                    "Error: " + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
